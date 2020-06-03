@@ -6,7 +6,6 @@ import EditorPanel from './Components/EditorPanel'
 import SaveFileModal from "./Components/SaveFileModal"
 import BrowseFileModal from "./Components/BrowseFileModal"
 
-
 // Tool
 import debounce from "lodash/debounce"
 import marked from "marked"
@@ -30,6 +29,41 @@ Markdown:
     }
     this.onChange = debounce(this.onChange, 500)
   }
+  componentWillMount() {
+    this.loadLocalFiles()
+  }
+
+  componentDidMount() {
+    this.fillTextFromLocal()
+    this.setState(() => {
+      return {
+        textValue: this.textarea.value
+      }
+    })
+  }
+  loadLocalFiles = () => {
+    let localSavedFiles = {}
+    for (let name in localStorage) {
+        if (name.indexOf("MDE-") > -1) {
+        localSavedFiles[name] = localStorage.getItem(name)
+      }
+    }
+    this.setState(() => {
+      return {
+        savedFiles: localSavedFiles
+      }
+    })
+  }
+  loadLocal = () => {
+    return localStorage.getItem("currentText")
+  }
+
+  fillTextFromLocal = () => {
+    this.textarea.value = this.loadLocal()
+      ? this.loadLocal()
+      : this.state.textValue
+  }
+
   setTextFromFileName = filename => {
     this.textValue = localStorage.getItem(filename)
     localStorage.setItem("currentText", this.textValue)
@@ -96,12 +130,15 @@ Markdown:
   }
   removeFile = fileName => {
     localStorage.removeItem(fileName)
-    const newSavedFiles = this.savedFiles[fileName] = null
+    const newSavedFiles = this.state.savedFiles
+    delete newSavedFiles[fileName]
     this.setState(() => {
       return {
         savedFiles: newSavedFiles
       }
     })
+    // this.renderBrows(this.state.isBrowsing, this.state.savedFiles)
+    this.toggleBrowse()
     return {
       name: fileName
     }

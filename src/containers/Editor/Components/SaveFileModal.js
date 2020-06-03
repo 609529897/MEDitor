@@ -15,7 +15,6 @@ class SaveFileModal extends PureComponent {
     onCancel: PropTypes.func,
     textValue: PropTypes.string
   }
-
   handleSave = () => {
     const name = this.inpitNode.value
     const textValue = this.props.textValue
@@ -31,28 +30,28 @@ class SaveFileModal extends PureComponent {
     const { isSaving, onCancel } = this.props
     return (
       <div>
-        <Dialog open={isSaving} aria-labelledby="form-dialog-title" >
-        <DialogContent>
-          <DialogContentText>文件名称</DialogContentText>
-          <Input
-            autoFocus
-            margin="dense"
-            id="name"
-            type="text"
-            fullWidth
-            onKeyDown={(e) => this.mockSubmit(e)}
-            inputRef={inpitNode => this.inpitNode = inpitNode}
-          />
-        </DialogContent>
-        <DialogActions>
-          <FlatButton color="primary" onClick={() => onCancel()}>
-            取消
+        <Dialog open={isSaving} aria-labelledby="form-dialog-title">
+          <DialogContent  style={{ width: 224 + "px" }}>
+            <DialogContentText>文件名称</DialogContentText>
+            <Input
+              autoFocus
+              margin="dense"
+              id="name"
+              type="text"
+              fullWidth
+              onKeyDown={(e) => this.mockSubmit(e)}
+              inputRef={inpitNode => this.inpitNode = inpitNode}
+            />
+          </DialogContent>
+          <DialogActions>
+            <FlatButton color="primary" onClick={() => onCancel()}>
+              取消
           </FlatButton>
-          <FlatButton color="primary" onClick={() => this.handleSave()}>
-            保存
+            <FlatButton color="primary" onClick={() => this.handleSave()}>
+              保存
           </FlatButton>
-        </DialogActions>
-      </Dialog>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }

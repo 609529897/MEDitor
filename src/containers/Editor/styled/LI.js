@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const LI = styled.li`
   list-style: none;
-  padding: 1rem;
+  padding: 0px;
   font-size: 1.6rem;
   font-family: Roboto, sans-serif;
   display: flex;
@@ -14,7 +14,9 @@ const LI = styled.li`
   & span {
     cursor: pointer;
     flex-grow: 1;
-    font-size: 20px;
+    font-size: 16px;
+    margin-right: 30px;
+    width: 146px;
   }
   & svg {
     cursor: pointer;

@@ -15,7 +15,7 @@ class FileList extends PureComponent {
   render() {
     const { savedFiles, openFile, toggleBrowse, removeFile } = this.props;
     return (
-      <ul style={{ width: "100%", boxSizing: "border-box"}}>
+      <ul style={{ width: "100%", boxSizing: "border-box", padding: 0 + "px", margin: 0 + "px"}}>
         {Object.keys(savedFiles).map((item, idx) => {
           return (
             <FileItem
@@ -26,7 +26,7 @@ class FileList extends PureComponent {
               toggleBrowse={toggleBrowse}
               removeFile={removeFile}
             />
-          );
+          )
         })}
       </ul>
     );
